@@ -1,13 +1,33 @@
+"use client";
 import Image from "next/image";
 import { List } from "./_components/list";
 import { Alert } from "./_components/alert";
+import { useState } from "react";
 
 export default function Home() {
+  const [index, setIndex] = useState(0);
+
+  const Btn = () => {
+    setIndex(index + 1);
+  };
+  const [select, setSelected] = useState("");
+  const firstHandle = () => {
+    setSelected = "All";
+  };
+  const secondHandle = () => {
+    setSelected = "Active";
+  };
+  const thirdHandle = () => {
+    setSelected = "Completed";
+  };
   return (
     <div className="bg-white-900 drop-shadow-1g max-w-full flex justify-center pt-[60]">
       <div className=" w-[377] border drop-shadow-lg flex p-6 text-center rounded-xl flex-col bg-white gap-8">
         <div className="flex gap-5 flex-col">
-          <h1 className="text-black text-xl font-bold font-sans">To-Do List</h1>
+          <p className="text-black text-xl font-bold font-sans" onClick={Btn}>
+            To-Do List
+          </p>
+          {index}
           <div className="flex gap-1.5">
             <input
               id="inputContain"

@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { List } from "./_components/list";
 import { Alert } from "./_components/alert";
 import { useState } from "react";
@@ -7,9 +6,6 @@ import { useState } from "react";
 export default function Home() {
   const [index, setIndex] = useState(0);
 
-  const Btn = () => {
-    setIndex(index + 1);
-  };
   const [select, setSelected] = useState("All");
   const firstHandle = () => {
     setSelected("All");
@@ -20,27 +16,26 @@ export default function Home() {
   const thirdHandle = () => {
     setSelected("Completed");
   };
-  const [value, setValue] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [inputString, setinputString] = useState("");
+
+  const [inputArray, setinputArray] = useState([]);
   const handleAdd = () => {
-    setTodos([...todos, value]);
-    setValue("");
+    setIndex(index + 1);
+    setinputArray([...inputArray, inputString]);
+    setinputString("");
   };
 
+  console.log(inputString, inputArray);
   return (
     <div className="bg-white-900 drop-shadow-1g max-w-full flex justify-center pt-[60]">
       <div className=" w-[377] border drop-shadow-lg flex p-6 text-center rounded-xl flex-col bg-white gap-8">
         <div className="flex gap-5 flex-col">
-          <p className="text-black text-xl font-bold font-sans" onClick={Btn}>
-            To-Do List
-          </p>
+          <p className="text-black text-xl font-bold font-sans">To-Do List</p>
           Task - {index}
           <div className="flex gap-1.5">
             <input
-              value={value}
-              onChange={(event) => {
-                setValue(event.target.value);
-              }}
+              value={inputString}
+              onChange={(event) => setinputString(event.target.value)}
               id="inputContain"
               className="text-black w-full border-gray-600 border rounded-lg p-1.5 text-sm"
               placeholder="Add a new task..."
@@ -85,16 +80,19 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div className="flex gap-[22px] flex-col">
-          {todos.map((item) => (
-            <List todo={item} />
-          ))}
-          <hr />
-          <Alert />
-        </div>
-        <div className="flex text-sm text-[#6B7280] justify-center">
-          No tasks yet. Add one above!
-        </div>
+        {inputArray.length > 0 ? (
+          <div className="flex gap-[22px] flex-col text-left">
+            {inputArray.map((item, index) => {
+              return <List todo={item} key={index} />;
+            })}
+          </div>
+        ) : (
+          <div className="flex text-sm text-[#6B7280] justify-center py-4">
+            No tasks yet. Add one above!
+          </div>
+        )}
+        <hr className="border-gray-100" />
+        <Alert />
         <div className="text-[#6B7280] text-xs">
           Powered by{" "}
           <span className="text-blue-600 cursor-pointer">Pinecone academy</span>

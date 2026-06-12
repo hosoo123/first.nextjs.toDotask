@@ -2,6 +2,7 @@
 import { List } from "./_components/list";
 import { Alert } from "./_components/alert";
 import { useState } from "react";
+import { adapter } from "next/dist/server/web/adapter";
 
 export default function Home() {
   const [index, setIndex] = useState(0);
@@ -16,22 +17,56 @@ export default function Home() {
   const thirdHandle = () => {
     setSelected("Completed");
   };
+
   const [inputString, setinputString] = useState("");
 
   const [inputArray, setinputArray] = useState([]);
+
+  console.log("arrrrr", inputArray);
+
   const handleAdd = () => {
+    if (!inputString.trim()) {
+      return;
+    }
     setIndex(index + 1);
-    setinputArray([...inputArray, inputString]);
+    setinputArray([
+      ...inputArray,
+      {
+        id: index,
+        text: inputString,
+        checked: false,
+      },
+    ]);
+
     setinputString("");
   };
+  const toggleTask = (id) => {
+    setinputArray(
+      inputArray.map((task) =>
+        task.id === id ? { ...task, checked: !task.checked } : task,
+      ),
+    );
+  };
 
-  console.log(inputString, inputArray);
+  const toggleTask2 = () => {
+    setinputArray(inputArray.map(() => {}));
+  };
+
+  const filteredTask = inputArray.filter((inputArr) => {
+    if (select === "All") {
+      return inputArr;
+    } else if (select === "Active") {
+      return !inputArr.checked;
+    } else if (select === "Completed") {
+      return inputArr.checked;
+    }
+  });
+
   return (
     <div className="bg-white-900 drop-shadow-1g max-w-full flex justify-center pt-[60]">
       <div className=" w-[377] border drop-shadow-lg flex p-6 text-center rounded-xl flex-col bg-white gap-8">
         <div className="flex gap-5 flex-col">
           <p className="text-black text-xl font-bold font-sans">To-Do List</p>
-          Task - {index}
           <div className="flex gap-1.5">
             <input
               value={inputString}
@@ -82,8 +117,8 @@ export default function Home() {
         </div>
         {inputArray.length > 0 ? (
           <div className="flex gap-[22px] flex-col text-left">
-            {inputArray.map((item, index) => {
-              return <List todo={item} key={index} />;
+            {filteredTask.map((item, index) => {
+              return <List todo={item} hamaagui={toggleTask} key={item.id} />;
             })}
           </div>
         ) : (
@@ -92,7 +127,7 @@ export default function Home() {
           </div>
         )}
         <hr className="border-gray-100" />
-        <Alert />
+        <Alert niitTask={index} />
         <div className="text-[#6B7280] text-xs">
           Powered by{" "}
           <span className="text-blue-600 cursor-pointer">Pinecone academy</span>

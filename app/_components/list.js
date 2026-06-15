@@ -8,7 +8,7 @@ export const List = ({ todo, hamaagui }) => {
           checked={todo.checked}
           onChange={() => hamaagui(todo.id)}
         />
-        {todo.text}
+        <p className={todo.checked ? "line-through" : ""}>{todo.text}</p>
       </div>
       <button
         // onClick={deleteBtn}

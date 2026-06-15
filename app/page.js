@@ -22,8 +22,6 @@ export default function Home() {
 
   const [inputArray, setinputArray] = useState([]);
 
-  console.log("arrrrr", inputArray);
-
   const handleAdd = () => {
     if (!inputString.trim()) {
       return;
@@ -48,10 +46,6 @@ export default function Home() {
     );
   };
 
-  const toggleTask2 = () => {
-    setinputArray(inputArray.map(() => {}));
-  };
-
   const filteredTask = inputArray.filter((inputArr) => {
     if (select === "All") {
       return inputArr;
@@ -61,6 +55,8 @@ export default function Home() {
       return inputArr.checked;
     }
   });
+
+  const completedCount = inputArray.filter((item) => item.checked == true);
 
   return (
     <div className="bg-white-900 drop-shadow-1g max-w-full flex justify-center pt-[60]">
@@ -127,7 +123,7 @@ export default function Home() {
           </div>
         )}
         <hr className="border-gray-100" />
-        <Alert niitTask={index} />
+        <Alert niitTask={index} completedCount={completedCount.length} />
         <div className="text-[#6B7280] text-xs">
           Powered by{" "}
           <span className="text-blue-600 cursor-pointer">Pinecone academy</span>

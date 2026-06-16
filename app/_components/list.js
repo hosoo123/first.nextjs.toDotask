@@ -1,4 +1,4 @@
-export const List = ({ todo, hamaagui }) => {
+export const List = ({ todo, hamaagui, deleteBtn }) => {
   return (
     <div className="w-full flex justify-between  bg-[#F3F4F6] p-4 rounded-lg">
       <div className="text-black flex gap-2.5 items-center ">
@@ -11,7 +11,7 @@ export const List = ({ todo, hamaagui }) => {
         <p className={todo.checked ? "line-through" : ""}>{todo.text}</p>
       </div>
       <button
-        // onClick={deleteBtn}
+        onClick={() => deleteBtn(todo.id)}
         className="text-[#ef4444] cursor-pointer rounded-lg bg-[#fef2f2] w-[67] h-[30]"
       >
         Delete

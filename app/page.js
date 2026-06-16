@@ -2,7 +2,6 @@
 import { List } from "./_components/list";
 import { Alert } from "./_components/alert";
 import { useState } from "react";
-import { adapter } from "next/dist/server/web/adapter";
 
 export default function Home() {
   const [index, setIndex] = useState(0);
@@ -57,7 +56,12 @@ export default function Home() {
   });
 
   const completedCount = inputArray.filter((item) => item.checked == true);
-
+  const clearCompleted = () => {
+    setinputArray(inputArray.filter((task) => task.checked == false));
+  };
+  const deleteBtn = (id) => {
+    setinputArray(inputArray.filter((todo) => todo.id !== id));
+  };
   return (
     <div className="bg-white-900 drop-shadow-1g max-w-full flex justify-center pt-[60]">
       <div className=" w-[377] border drop-shadow-lg flex p-6 text-center rounded-xl flex-col bg-white gap-8">
@@ -78,7 +82,7 @@ export default function Home() {
               Add
             </button>
           </div>
-          <div className="flex gap-1.5 h-8 text-xs">
+          <div className="flex gap-1.5 h-8 text-xs ">
             <button
               className={`cursor-pointer rounded-lg px-3 transition-colors ${
                 select === "All"
@@ -114,7 +118,14 @@ export default function Home() {
         {inputArray.length > 0 ? (
           <div className="flex gap-[22px] flex-col text-left">
             {filteredTask.map((item, index) => {
-              return <List todo={item} hamaagui={toggleTask} key={item.id} />;
+              return (
+                <List
+                  todo={item}
+                  hamaagui={toggleTask}
+                  key={item.id}
+                  deleteBtn={deleteBtn}
+                />
+              );
             })}
           </div>
         ) : (
@@ -123,7 +134,11 @@ export default function Home() {
           </div>
         )}
         <hr className="border-gray-100" />
-        <Alert niitTask={index} completedCount={completedCount.length} />
+        <Alert
+          niitTask={inputArray.length}
+          completedCount={completedCount.length}
+          clearCompleted={clearCompleted}
+        />
         <div className="text-[#6B7280] text-xs">
           Powered by{" "}
           <span className="text-blue-600 cursor-pointer">Pinecone academy</span>

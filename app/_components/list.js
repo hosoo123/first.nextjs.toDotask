@@ -11,7 +11,11 @@ export const List = ({ todo, hamaagui, deleteBtn }) => {
         <p className={todo.checked ? "line-through" : ""}>{todo.text}</p>
       </div>
       <button
-        onClick={() => deleteBtn(todo.id)}
+        onClick={() => {
+          if (confirm("ustgahdaa itgelte bnu bandia")) {
+            deleteBtn(todo.id);
+          }
+        }}
         className="text-[#ef4444] cursor-pointer rounded-lg bg-[#fef2f2] w-[67] h-[30]"
       >
         Delete

@@ -70,6 +70,7 @@ export default function Home() {
           <div className="flex gap-1.5">
             <input
               value={inputString}
+              onKeyDown={handleKeyDown}
               onChange={(event) => setinputString(event.target.value)}
               id="inputContain"
               className="text-black w-full border-gray-600 border rounded-lg p-1.5 text-sm"
@@ -77,14 +78,14 @@ export default function Home() {
             />
             <button
               onClick={handleAdd}
-              className="flex w-[59] cursor-pointer text-sm h-10 text-white bg-blue-600 items-center justify-center rounded-xl"
+              className="flex w-[59] h-[40px] cursor-pointer text-sm h-10 text-white bg-blue-600 items-center justify-center rounded-xl"
             >
               Add
             </button>
           </div>
-          <div className="flex gap-1.5 h-8 text-xs ">
+          <div className="flex gap-1.5 h-8 h-[32px] text-xs ">
             <button
-              className={`cursor-pointer rounded-lg px-3 transition-colors ${
+              className={`cursor-pointer w-[38px] rounded-lg px-3 transition-colors ${
                 select === "All"
                   ? "bg-blue-600 text-white"
                   : "bg-gray-300 text-black "
@@ -94,7 +95,7 @@ export default function Home() {
               All
             </button>
             <button
-              className={`cursor-pointer rounded-lg "${
+              className={`cursor-pointer w-[60px] rounded-lg "${
                 select == "Active"
                   ? "text-black bg-blue-600 w-[60px]"
                   : " bg-gray-300 text-black w-[60px]"
@@ -104,7 +105,7 @@ export default function Home() {
               Active
             </button>
             <button
-              className={`cursor-pointer rounded-lg "${
+              className={`cursor-pointer w-[87px] rounded-lg "${
                 select == "Completed"
                   ? "text-black bg-blue-600 w-[87px]"
                   : " bg-gray-300 text-black w-[87px]"

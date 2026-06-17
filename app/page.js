@@ -54,7 +54,6 @@ export default function Home() {
       return inputArr.checked;
     }
   });
-
   const completedCount = inputArray.filter((item) => item.checked == true);
   const clearCompleted = () => {
     setinputArray(inputArray.filter((task) => task.checked == false));
@@ -70,7 +69,12 @@ export default function Home() {
           <div className="flex gap-1.5">
             <input
               value={inputString}
-              onKeyDown={handleKeyDown}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  event.preventDefault();
+                  handleAdd();
+                }
+              }}
               onChange={(event) => setinputString(event.target.value)}
               id="inputContain"
               className="text-black w-full border-gray-600 border rounded-lg p-1.5 text-sm"
@@ -78,7 +82,7 @@ export default function Home() {
             />
             <button
               onClick={handleAdd}
-              className="flex w-[59] h-[40px] cursor-pointer text-sm h-10 text-white bg-blue-600 items-center justify-center rounded-xl"
+              className="flex w-[59] h-[40px] cursor-pointer text-sm h-10 text-white bg-[#3C82F6] items-center justify-center rounded-xl"
             >
               Add
             </button>
@@ -87,8 +91,8 @@ export default function Home() {
             <button
               className={`cursor-pointer w-[38px] rounded-lg px-3 transition-colors ${
                 select === "All"
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-300 text-black "
+                  ? "bg-[#3C82F6] text-white"
+                  : "bg-[#F3F4F6] text-black "
               }`}
               onClick={firstHandle}
             >
@@ -97,8 +101,8 @@ export default function Home() {
             <button
               className={`cursor-pointer w-[60px] rounded-lg "${
                 select == "Active"
-                  ? "text-black bg-blue-600 w-[60px]"
-                  : " bg-gray-300 text-black w-[60px]"
+                  ? "text-black bg-[#3C82F6] w-[60px]"
+                  : " bg-[#F3F4F6] text-black w-[60px]"
               } `}
               onClick={secondHandle}
             >
@@ -107,8 +111,8 @@ export default function Home() {
             <button
               className={`cursor-pointer w-[87px] rounded-lg "${
                 select == "Completed"
-                  ? "text-black bg-blue-600 w-[87px]"
-                  : " bg-gray-300 text-black w-[87px]"
+                  ? "text-black bg-[#3C82F6] w-[87px]"
+                  : " bg-[#F3F4F6] text-black w-[87px]"
               } `}
               onClick={thirdHandle}
             >

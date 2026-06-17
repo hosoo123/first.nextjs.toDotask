@@ -92,7 +92,7 @@ export default function Home() {
               className={`cursor-pointer w-[38px] rounded-lg px-3 transition-colors ${
                 select === "All"
                   ? "bg-[#3C82F6] text-white"
-                  : "bg-[#F3F4F6] text-black "
+                  : "bg-[#F3F4F6] text-[#363636] "
               }`}
               onClick={firstHandle}
             >
@@ -101,8 +101,8 @@ export default function Home() {
             <button
               className={`cursor-pointer w-[60px] rounded-lg "${
                 select == "Active"
-                  ? "text-black bg-[#3C82F6] w-[60px]"
-                  : " bg-[#F3F4F6] text-black w-[60px]"
+                  ? "text-[#363636] bg-[#3C82F6] w-[60px]"
+                  : " bg-[#F3F4F6] text-[#363636] w-[60px]"
               } `}
               onClick={secondHandle}
             >
@@ -111,8 +111,8 @@ export default function Home() {
             <button
               className={`cursor-pointer w-[87px] rounded-lg "${
                 select == "Completed"
-                  ? "text-black bg-[#3C82F6] w-[87px]"
-                  : " bg-[#F3F4F6] text-black w-[87px]"
+                  ? "text-[#363636] bg-[#3C82F6] w-[87px]"
+                  : " bg-[#F3F4F6] text-[#363636] w-[87px]"
               } `}
               onClick={thirdHandle}
             >
